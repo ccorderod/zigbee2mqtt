@@ -55,6 +55,18 @@
       "qos": 1
     },
     {
+      "id": "0x00124b00061ed9d2",
+      "friendly_name": "DinRail1-Main",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc3a24",
+      "friendly_name": "DinRail2-Main",
+      "retain": false,
+      "qos": 1
+    },
+    {
       "id": "0x00124b0002cc3cba",
       "friendly_name": "DinRail3-Despacho",
       "retain": false,
