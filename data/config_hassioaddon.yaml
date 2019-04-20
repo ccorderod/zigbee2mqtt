@@ -1,0 +1,82 @@
+{
+  "data_path": "/share/zigbee2mqtt",
+  "homeassistant": true,
+  "permit_join": false,
+  "mqtt_base_topic": "10/49",
+  "mqtt_server": "mqtt://192.168.1.20",
+  "serial_port": "/dev/ttyACM0",
+  "devices": [
+    {
+      "id": "0x00158d0002b5f997",
+      "friendly_name": "VibracionDormitorioPrincipal",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00158d000313c8f1",
+      "friendly_name": "PuertaEntrada",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00158d00028d18ed",
+      "friendly_name": "PuertaCocina",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00158d00027cf6f1",
+      "friendly_name": "MiCubo1",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc84ab",
+      "friendly_name": "Plug1-DP",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc915d",
+      "friendly_name": "Plug2-Lavadora",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc807e",
+      "friendly_name": "Plug5-Salon",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc8261",
+      "friendly_name": "Plug7",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x00124b0002cc3cba",
+      "friendly_name": "DinRail3-Despacho",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x000d6f0004b72537",
+      "friendly_name": "MotionNyce1",
+      "retain": false,
+      "qos": 1
+    },
+    {
+      "id": "0x90fd9ffffee36a77",
+      "friendly_name": "IkeaRemote1",
+      "retain": false,
+      "qos": 1
+    }
+  ],
+  "network_key": [],
+  "mqtt_user": "ccordero",
+  "mqtt_pass": "NyNicksNuevo69",
+  "log_level": "error",
+  "zigbee_shepherd_debug": false,
+  "zigbee_shepherd_devices": true
+}
