@@ -49,6 +49,12 @@
       "qos": 1
     },
     {
+      "id": "0x00124b0002cc820c",
+      "friendly_name": "Plug6-Juan",
+      "retain": false,
+      "qos": 1
+    },
+    {
       "id": "0x00124b0002cc8261",
       "friendly_name": "Plug7",
       "retain": false,
