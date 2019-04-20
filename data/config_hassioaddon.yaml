@@ -43,6 +43,17 @@
       "qos": 1
     },
     {
+      "id": "0x00124b0002cc9276",
+      "friendly_name": "Plug3-Despacho",
+      "retain": false,
+      "qos": 1
+    },    {
+      "id": "0x00124b0002cc7ef5",
+      "friendly_name": "Plug4-Despacho",
+      "retain": false,
+      "qos": 1
+    },
+    {
       "id": "0x00124b0002cc807e",
       "friendly_name": "Plug5-Salon",
       "retain": false,
