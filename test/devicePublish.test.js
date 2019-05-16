@@ -725,6 +725,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('my_device_id');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse get topic', () => {
@@ -733,6 +734,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('get');
             expect(parsed.ID).toBe('my_device_id2');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
 
@@ -768,6 +770,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('get');
             expect(parsed.ID).toBe('my_device_id2');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse topic with when deviceID has multiple slashes', () => {
@@ -776,6 +779,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('floor0/basement/my_device_id2');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse topic with when base and deviceID have multiple slashes', () => {
@@ -790,15 +794,26 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('floor0/basement/my_device_id2');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         }
         );
 
-        it('Should parse set with ieeAddr topic', () => {
+        it('Should parse set with attribute topic', () => {
+            const topic = 'zigbee2mqtt/0x12345689/set/foobar';
+            const parsed = devicePublish.parseTopic(topic);
+            expect(parsed.type).toBe('set');
+            expect(parsed.ID).toBe('0x12345689');
+            expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBe('foobar');
+        });
+
+        it('Should parse set with ieeeAddr topic', () => {
             const topic = 'zigbee2mqtt/0x12345689/set';
             const parsed = devicePublish.parseTopic(topic);
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('0x12345689');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse set with postfix topic', () => {
@@ -807,6 +822,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('0x12345689');
             expect(parsed.postfix).toBe('left');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse set with almost postfix topic', () => {
@@ -815,6 +831,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('wohnzimmer.light.wall.right');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse set with postfix topic', () => {
@@ -823,6 +840,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('0x12345689');
             expect(parsed.postfix).toBe('right');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Should parse set with postfix topic', () => {
@@ -831,6 +849,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('0x12345689');
             expect(parsed.postfix).toBe('bottom_left');
+            expect(parsed.attribute).toBeUndefined();
         });
 
         it('Shouldnt parse set with invalid postfix topic', () => {
@@ -839,6 +858,16 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('set');
             expect(parsed.ID).toBe('0x12345689/invalid');
             expect(parsed.postfix).toBe('');
+            expect(parsed.attribute).toBeUndefined();
+        });
+
+        it('Should parse set with postfix topic and attribute', () => {
+            const topic = 'zigbee2mqtt/0x12345689/bottom_left/set/foobar';
+            const parsed = devicePublish.parseTopic(topic);
+            expect(parsed.type).toBe('set');
+            expect(parsed.ID).toBe('0x12345689');
+            expect(parsed.postfix).toBe('bottom_left');
+            expect(parsed.attribute).toBe('foobar');
         });
 
         it('Should parse set with and slashes in base and deviceID postfix topic', () => {
@@ -853,6 +882,7 @@ describe('DevicePublish', () => {
             expect(parsed.type).toBe('get');
             expect(parsed.ID).toBe('my/device/in/basement/sensor');
             expect(parsed.postfix).toBe('bottom_left');
+            expect(parsed.attribute).toBeUndefined();
         }
         );
     });
@@ -896,11 +926,13 @@ describe('DevicePublish', () => {
         expect(zigbee.publish.mock.calls[1][2]).toBe('lightingColorCtrl');
         expect(zigbee.publish.mock.calls[1][3]).toBe('moveToColor');
         await wait(10);
-        expect(zigbee.publish).toHaveBeenCalledTimes(4);
-        expect(zigbee.publish.mock.calls[2][2]).toBe('genLevelCtrl');
+        expect(zigbee.publish).toHaveBeenCalledTimes(5);
+        expect(zigbee.publish.mock.calls[2][2]).toBe('genOnOff');
         expect(zigbee.publish.mock.calls[2][3]).toBe('read');
-        expect(zigbee.publish.mock.calls[3][2]).toBe('lightingColorCtrl');
+        expect(zigbee.publish.mock.calls[3][2]).toBe('genLevelCtrl');
         expect(zigbee.publish.mock.calls[3][3]).toBe('read');
+        expect(zigbee.publish.mock.calls[4][2]).toBe('lightingColorCtrl');
+        expect(zigbee.publish.mock.calls[4][3]).toBe('read');
         expect(publishEntityState).toHaveBeenCalledTimes(2);
         expect(publishEntityState).toHaveBeenNthCalledWith(1,
             '0x00000020',
